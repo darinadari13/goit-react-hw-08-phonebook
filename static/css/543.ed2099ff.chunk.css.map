@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/543.ed2099ff.chunk.css","mappings":"AAAA,MACE,iBACF,CAEA,0BACE,iBACF","sources":["components/SignForm/SignForm.module.css"],"sourcesContent":["label {\n  margin-right: 15px;\n}\n\n.formSpan {\n  margin-right: 10px;\n}"],"names":[],"sourceRoot":""}
