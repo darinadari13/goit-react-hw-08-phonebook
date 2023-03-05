@@ -1,13 +1,12 @@
 import { useState } from 'react';
-import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from '../../redux/contactsSlice/selectors';
-import { addContact } from '../../redux/contactsSlice/operations';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { selectContacts } from '../../redux/contactsSlice/selectors';
+// import { addContact } from '../../redux/contactsSlice/operations';
 
-export default function ContactForm() {
-  const contacts = useSelector(selectContacts);
-  const dispatch = useDispatch();
+export default function ContactForm({onSubmit}) {
+  // const contacts = useSelector(selectContacts);
+  // const dispatch = useDispatch();
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -30,17 +29,23 @@ export default function ContactForm() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const isInContacts = contacts.some(
-      (contact) => contact.name.toLowerCase() === name.toLowerCase()
-    );
 
-    if (isInContacts) {
-      alert(`${name} is already in contacts`);
-      return;
+    const formData = {
+      name,
+      number
     }
+    onSubmit(formData);
+    // const isInContacts = contacts.some(
+    //   (contact) => contact.name.toLowerCase() === name.toLowerCase()
+    // );
 
-    const newContact = {name, number, id: nanoid() }
-    dispatch(addContact(newContact));
+    // if (isInContacts) {
+    //   alert(`${name} is already in contacts`);
+    //   return;
+    // }
+
+    // const newContact = {name, number, id: nanoid() }
+    // dispatch(addContact(newContact));
     setName('');
     setNumber('');
   };
@@ -54,6 +59,7 @@ export default function ContactForm() {
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          placeholder={'Enter a name'}
           required
           value={name}
           onChange={handleInputChange}
@@ -65,6 +71,7 @@ export default function ContactForm() {
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          placeholder={'Enter a phone number'}
           required
           value={number}
           onChange={handleInputChange}

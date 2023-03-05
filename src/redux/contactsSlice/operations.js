@@ -1,32 +1,34 @@
-import axios from "axios";
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { ContactsAPI } from "services/api";
 
 
 export const getContactsRequest = createAsyncThunk(
-  'contacts/getContacts', async (_, thunkAPI) => {
+  'contacts/getContacts', (_, {rejectWithValue}) => {
+    try {
+      return ContactsAPI.getContacts();
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
 
 });
 
-export const addContact = createAsyncThunk(
-  'contacts/addContact', async (contact, thunkApi) => {
+export const addContactRequest = createAsyncThunk(
+  'contacts/addContact', (formData, {rejectWithValue}) => {
     try {
-      const {data} = await axios.post('/contacts', contact);
-      return data;
+      return ContactsAPI.addContact(formData);
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   }
 );
 
-export const deleteContact = createAsyncThunk(
-  'contacts/deleteContact', async (contactId, thunkApi) => {
-    console.log(contactId);
+export const deleteContactRequest = createAsyncThunk(
+  'contacts/deleteContact', (contactId, {rejectWithValue}) => {
     try {
-      const {data} = await axios.delete(`/contacts/${contactId}`);
-      return data.id;
+      return ContactsAPI.deleteContact(`${contactId}`);
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   }
 );

@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { loginRequest, registerRequest, logOutRequest } from './operations';
+import { loginRequest, registerRequest, logOutRequest, getCurrentUserRequest } from './operations';
 
 const initialState = {
-  userData: null,
+  info: null,
   isLoggedIn: false,
   isLoading: false,
   error: null
@@ -21,7 +21,7 @@ const userSlice = createSlice({
     .addCase(loginRequest.fulfilled, (state, action) => {
       state.isLoggedIn = true;
       state.isLoading = false;
-      state.userData = action.payload;
+      state.info = action.payload.user;
     })
     .addCase(loginRequest.rejected, (state, action) => {
       state.error = action.payload;
@@ -33,7 +33,7 @@ const userSlice = createSlice({
     .addCase(registerRequest.fulfilled, (state, action) => {
       state.isLoggedIn = true;
       state.isLoading = false;
-      state.userData = action.payload;
+      state.info = action.payload.user;
     })
     .addCase(registerRequest.rejected, (state, action) => {
       state.error = action.payload;
@@ -45,9 +45,21 @@ const userSlice = createSlice({
     .addCase(logOutRequest.fulfilled, (state) => {
       state.isLoggedIn = false;
       state.isLoading = false;
-      state.userData = null;
+      state.info = null;
       })
     .addCase(logOutRequest.rejected, (state, action) => {
+      state.error = action.payload;
+      state.isLoading = false;
+    })
+    .addCase(getCurrentUserRequest.pending, (state) => {
+      state.isLoading = true;
+    })
+    .addCase(getCurrentUserRequest.fulfilled, (state, action) => {
+      state.isLoggedIn = true;
+      state.isLoading = false;
+      state.info = action.payload;
+      })
+    .addCase(getCurrentUserRequest.rejected, (state, action) => {
       state.error = action.payload;
       state.isLoading = false;
     })

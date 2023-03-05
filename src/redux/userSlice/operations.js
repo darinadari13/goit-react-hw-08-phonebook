@@ -26,3 +26,10 @@ export const logOutRequest = createAsyncThunk('user/logOut', (_, {rejectWithValu
   }
 });
 
+export const getCurrentUserRequest = createAsyncThunk('user/getUserDetails', (_, {rejectWithValue}) => {
+  try {
+    return UserAPI.getUserDetails()
+  } catch (error){
+    return rejectWithValue(error.message);
+  }
+});
