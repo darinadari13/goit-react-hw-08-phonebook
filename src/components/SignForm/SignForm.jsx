@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useRef } from 'react';
+import css from 'components/SignForm/SignForm.module.css'
 
 export default function SignForm({ onSubmit, isLoginForm = false}) {
 
@@ -33,7 +34,7 @@ export default function SignForm({ onSubmit, isLoginForm = false}) {
         <h2>{isLoginForm ? 'Sign In' : 'Sign up'}</h2>
         {isLoginForm ? null :
         (<label>
-          <span>Name</span>
+          <span className={css.formSpan}>Name</span>
             <input
               type="text"
               name="name"
@@ -43,7 +44,7 @@ export default function SignForm({ onSubmit, isLoginForm = false}) {
             />
         </label>)}
         <label>
-          <span>E-mail</span>
+          <span className={css.formSpan}>E-mail</span>
             <input
               type="email"
               name="email"
@@ -53,7 +54,7 @@ export default function SignForm({ onSubmit, isLoginForm = false}) {
             />
         </label>
         <label>
-          <span>Password</span>
+          <span className={css.formSpan}>Password</span>
             <input
               type="password"
               name="password"

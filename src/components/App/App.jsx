@@ -1,11 +1,12 @@
 
 import { NavLink, Route, Routes } from 'react-router-dom';
 import { lazy, Suspense, useEffect } from "react";
-import {selectIsLoggedIn, selectUserInfo} from '../redux/userSlice/selectors'
+import {selectIsLoggedIn, selectUserInfo} from '../../redux/userSlice/selectors'
 import { useDispatch, useSelector } from 'react-redux';
-import {getCurrentUserRequest} from '../redux/userSlice/operations';
-import Loader from './Loader';
-import UserMenu from './UserMenu/UserMenu';
+import {getCurrentUserRequest} from '../../redux/userSlice/operations';
+import css from 'components/App/App.module.css'
+import Loader from '../Loader';
+import UserMenu from '../UserMenu/UserMenu';
 
 
 const LazyContacts = lazy(()=> import('pages/Contacts/Contacts.jsx'));
@@ -14,7 +15,6 @@ const LazySignUp = lazy(()=> import('pages/SignUp/SignUp.jsx'))
 
 
 export default function App() {
-  
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const userData = useSelector(selectUserInfo);
@@ -30,17 +30,17 @@ export default function App() {
 
 
   return (
-    <div>
+    <div className={css.container}>
       <header>
-        <nav>
+        <nav className={css.nav}>
           {isLoggedIn && userData ? (
             <>
-            <NavLink to='/contacts'>Contacts</NavLink>
+            <NavLink to='/contacts'></NavLink>
             <UserMenu userData={userData}/>
             </>
           ) : (
             <>
-            <NavLink to='/login'>Sign In</NavLink>  
+            <NavLink to='/login' className={css.signIn}>Sign In</NavLink>  
             <NavLink to='/register'>Sign Up</NavLink>
             </>
           )}
