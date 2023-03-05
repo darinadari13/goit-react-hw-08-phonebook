@@ -5,7 +5,7 @@ import WithAuthRedirect from "HOC/WithAuthRedirect";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addContactRequest, deleteContactRequest, getContactsRequest } from "redux/contactsSlice/operations";
-import { selectFilteredContacts, selectLoading, selectError } from "redux/contactsSlice/selectors";
+import { selectFilteredContacts, selectLoading} from "redux/contactsSlice/selectors";
 import {selectIsLoggedIn} from "redux/userSlice/selectors";
 
 function ContactsPage() {
@@ -13,7 +13,7 @@ function ContactsPage() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const contacts = useSelector(selectFilteredContacts);
   const isLoading = useSelector(selectLoading);
-  const error = useSelector(selectError);
+
 
   useEffect(() => {
     if(!isLoggedIn) return;

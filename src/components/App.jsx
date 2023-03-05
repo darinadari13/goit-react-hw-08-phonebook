@@ -1,18 +1,16 @@
-// import ContactForm from './ContactForm/ContactForm';
-// import ContactList from './ContactList/ContactList';
-import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+
+import { NavLink, Route, Routes } from 'react-router-dom';
 import { lazy, Suspense, useEffect } from "react";
 import {selectIsLoggedIn, selectUserInfo} from '../redux/userSlice/selectors'
 import { useDispatch, useSelector } from 'react-redux';
-// import Filter from './Filter/Filter';
-import {getCurrentUserRequest, logOutRequest} from '../redux/userSlice/operations';
+import {getCurrentUserRequest} from '../redux/userSlice/operations';
 import Loader from './Loader';
-import SignInPage from 'pages/SignIn/SignIn';
-import SignUpPage from 'pages/SignUp/SignUp';
-import ContactsPage from 'pages/Contacts/Contacts';
 import UserMenu from './UserMenu/UserMenu';
 
+
+const LazyContacts = lazy(()=> import('pages/Contacts/Contacts.jsx'));
+const LazySignIn = lazy(()=> import('pages/SignIn/SignIn.jsx'));
+const LazySignUp = lazy(()=> import('pages/SignUp/SignUp.jsx'))
 
 
 export default function App() {
@@ -51,24 +49,12 @@ export default function App() {
       <main>
         <Suspense fallback={<Loader/>}>
           <Routes>
-            <Route path="/contacts" element={<ContactsPage/>}/>
-            <Route path="/login" element={<SignInPage/>}/>
-            <Route path="/register" element={<SignUpPage/>}/>
+            <Route path="/contacts" element={<LazyContacts/>}/>
+            <Route path="/login" element={<LazySignIn/>}/>
+            <Route path="/register" element={<LazySignUp/>}/>
           </Routes>
         </Suspense>
       </main>
-      {/* <h1>Phonebook</h1>
-      <ContactForm />
-      <h2>Contacts</h2>
-      {contacts.length > 0 ? (
-        <>
-          <Filter />
-          <ContactList />
-        </>
-      ) : (
-        <span>'No contacts'</span>
-      )}
-      {loading && <Loader/>} */}
     </div>
   );
 }
