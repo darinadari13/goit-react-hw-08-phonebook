@@ -4,7 +4,7 @@ import { loginRequest, registerRequest, logOutRequest, getCurrentUserRequest } f
 
 const initialState = {
   info: null,
-  isLoggedIn: false,
+  isLoggedIn: Boolean(localStorage.getItem('token')),
   isLoading: false,
   error: null
 };

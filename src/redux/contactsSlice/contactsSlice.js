@@ -4,14 +4,19 @@ import { addContactRequest, getContactsRequest, deleteContactRequest } from "./o
 const initialState = {
   data: [],
   isLoading: false,
-  error: null
+  error: null,
+  filter: ''
 }
 
 const contactsSlice = createSlice({
   name: "contacts",
   initialState,
 
-  reducers: {},
+  reducers: {
+    setFilter: (state, actions) => {
+      state.filter = actions.payload;
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -57,6 +62,6 @@ const contactsSlice = createSlice({
 );
 
 
-export const { handleFilterSlice } = contactsSlice.actions;
+export const { setFilter } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
 

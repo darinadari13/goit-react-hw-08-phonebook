@@ -35,7 +35,7 @@ export default function App() {
     <div>
       <header>
         <nav>
-          {isLoggedIn ? (
+          {isLoggedIn && userData ? (
             <>
             <NavLink to='/contacts'>Contacts</NavLink>
             <UserMenu userData={userData}/>
@@ -48,7 +48,6 @@ export default function App() {
           )}
         </nav>
       </header>
-
       <main>
         <Suspense fallback={<Loader/>}>
           <Routes>

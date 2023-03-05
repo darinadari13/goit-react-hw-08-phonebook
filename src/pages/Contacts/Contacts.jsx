@@ -1,16 +1,17 @@
 import ContactForm from "components/ContactForm/ContactForm";
 import Loader from "components/Loader";
+import Filter from "components/Filter/Filter";
 import WithAuthRedirect from "HOC/WithAuthRedirect";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addContactRequest, deleteContactRequest, getContactsRequest } from "redux/contactsSlice/operations";
-import { selectContacts, selectLoading, selectError } from "redux/contactsSlice/selectors";
+import { selectFilteredContacts, selectLoading, selectError } from "redux/contactsSlice/selectors";
 import {selectIsLoggedIn} from "redux/userSlice/selectors";
 
 function ContactsPage() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  const contacts = useSelector(selectContacts);
+  const contacts = useSelector(selectFilteredContacts);
   const isLoading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
@@ -32,6 +33,7 @@ function ContactsPage() {
     <div>
     <ContactForm onSubmit={handleSubmit}/>
     {isLoading && <Loader/>}
+    {<Filter/>}
     {contacts?.length > 0 && <ul>
       {contacts.map(contact => {
         return (

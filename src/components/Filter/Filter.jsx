@@ -1,5 +1,5 @@
 import css from './Filter.module.css';
-import { handleFilterSlice } from '../../redux/contactsSlice/contactsSlice';
+import { setFilter } from '../../redux/contactsSlice/contactsSlice';
 import { useSelector,useDispatch } from 'react-redux';
 import { selectFilter } from '../../redux/contactsSlice/selectors';
 
@@ -9,7 +9,7 @@ const Filter = () => {
   const filter = useSelector(selectFilter);
 
   const handleFilter = e => {
-    dispatch(handleFilterSlice(e.target.value));
+    dispatch(setFilter(e.target.value));
   };
   
   return (
