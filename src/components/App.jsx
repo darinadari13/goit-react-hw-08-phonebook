@@ -11,21 +11,16 @@ import Loader from './Loader';
 import SignInPage from 'pages/SignIn/SignIn';
 import SignUpPage from 'pages/SignUp/SignUp';
 import ContactsPage from 'pages/Contacts/Contacts';
+import UserMenu from './UserMenu/UserMenu';
 
 
 
 export default function App() {
-  const navigate = useNavigate();
+  
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const userData = useSelector(selectUserInfo);
 
-  const handleLogOut = () => {
-    dispatch(logOutRequest()).then(() => {
-      localStorage.removeItem('token');
-      navigate('/login');
-    });
-  }
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -42,14 +37,11 @@ export default function App() {
         <nav>
           {isLoggedIn ? (
             <>
-            {/* <NavLink to='/'>Home</NavLink> */}
             <NavLink to='/contacts'>Contacts</NavLink>
-            <span>Hello, {userData.name}</span>
-            <button onClick={handleLogOut}>Logout</button>
+            <UserMenu userData={userData}/>
             </>
           ) : (
             <>
-            {/* <NavLink to='/'>Home</NavLink> */}
             <NavLink to='/login'>Sign In</NavLink>  
             <NavLink to='/register'>Sign Up</NavLink>
             </>
@@ -60,11 +52,9 @@ export default function App() {
       <main>
         <Suspense fallback={<Loader/>}>
           <Routes>
-            {/* <Route path="/" element={<HomePage/>} /> */}
             <Route path="/contacts" element={<ContactsPage/>}/>
             <Route path="/login" element={<SignInPage/>}/>
             <Route path="/register" element={<SignUpPage/>}/>
-            {/* <Route path="*" element={<Navigate to="/contacts"/>} /> */}
           </Routes>
         </Suspense>
       </main>

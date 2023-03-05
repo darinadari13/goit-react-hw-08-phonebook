@@ -1,12 +1,13 @@
 import ContactForm from "components/ContactForm/ContactForm";
 import Loader from "components/Loader";
+import WithAuthRedirect from "HOC/WithAuthRedirect";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addContactRequest, deleteContactRequest, getContactsRequest } from "redux/contactsSlice/operations";
 import { selectContacts, selectLoading, selectError } from "redux/contactsSlice/selectors";
 import {selectIsLoggedIn} from "redux/userSlice/selectors";
 
-export default function ContactsPage() {
+function ContactsPage() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const contacts = useSelector(selectContacts);
@@ -45,3 +46,5 @@ export default function ContactsPage() {
     </div>
   )
 };
+
+export default WithAuthRedirect(ContactsPage, '/login');
