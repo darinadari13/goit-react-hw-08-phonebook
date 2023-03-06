@@ -1,14 +1,35 @@
 
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { selectIsLoggedIn } from 'redux/userSlice/selectors';
+import { setIsLoggedIn } from 'redux/userSlice/userSlice';
+import { getCurrentUserRequest } from '../redux/userSlice/operations';
 
 function WithAuthRedirect(Component, navigateTo) {
   const ComponentWithRedirect = props => {
+    const dispatch = useDispatch();
     const isLoggedIn = useSelector(selectIsLoggedIn);
 
-    return isLoggedIn ? <Component {...props} /> : <Navigate to={navigateTo} />;
+    useEffect(() => {
+      if (!localStorage.getItem('token')) {
+        dispatch(setIsLoggedIn(false))
+        return
+      }
+  
+      dispatch(getCurrentUserRequest())
+    }, [dispatch])
+
+    if (isLoggedIn === false) {
+      return <Navigate to={navigateTo} />
+    }
+
+    if (isLoggedIn === true) {
+      return <Component {...props} />
+    }
+  
+    
+    return <div>Loading user...</div>;
   };
 
   return ComponentWithRedirect;

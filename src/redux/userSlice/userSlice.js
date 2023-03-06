@@ -4,7 +4,7 @@ import { loginRequest, registerRequest, logOutRequest, getCurrentUserRequest } f
 
 const initialState = {
   info: null,
-  isLoggedIn: Boolean(localStorage.getItem('token')),
+  isLoggedIn: null,
   isLoading: false,
   error: null
 };
@@ -12,6 +12,12 @@ const initialState = {
 const userSlice = createSlice({
   name: "user",
   initialState,
+
+  reducers: {
+    setIsLoggedIn: (state, actions) => {
+      state.isLoggedIn = actions.payload;
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -67,5 +73,5 @@ const userSlice = createSlice({
 });
 
 
-
+export const { setIsLoggedIn } = userSlice.actions;
 export const userReducer = userSlice.reducer;

@@ -1,9 +1,8 @@
 
 import { NavLink, Route, Routes } from 'react-router-dom';
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense } from "react";
 import {selectIsLoggedIn, selectUserInfo} from '../../redux/userSlice/selectors'
-import { useDispatch, useSelector } from 'react-redux';
-import {getCurrentUserRequest} from '../../redux/userSlice/operations';
+import { useSelector } from 'react-redux';
 import css from 'components/App/App.module.css'
 import Loader from '../Loader';
 import UserMenu from '../UserMenu/UserMenu';
@@ -15,19 +14,8 @@ const LazySignUp = lazy(()=> import('pages/SignUp/SignUp.jsx'))
 const LazyHomePage = lazy(() => import('pages/Home/Home.jsx'))
 
 export default function App() {
-  const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const userData = useSelector(selectUserInfo);
-
-
-  useEffect(() => {
-    if (!localStorage.getItem('token')) {
-      return
-    }
-
-    dispatch(getCurrentUserRequest())
-  }, [dispatch])
-
 
   return (
     <div className={css.container}>
