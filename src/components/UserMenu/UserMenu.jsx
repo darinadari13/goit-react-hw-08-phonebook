@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { logOutRequest} from '../../redux/userSlice/operations';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
+import css from '../UserMenu/UserMenu.module.css'
 
 export default function UserMenu({ userData }) {
   const dispatch = useDispatch();
@@ -11,13 +12,13 @@ export default function UserMenu({ userData }) {
   const handleLogOut = () => {
     dispatch(logOutRequest()).then(() => {
       localStorage.removeItem('token');
-      navigate('/login');
+      navigate('/');
     });
   }
   return (
     <div>
       <p>{userData.email}</p>
-      <button onClick={handleLogOut}>Logout</button>
+      <button className={css.btn} onClick={handleLogOut}>Logout</button>
     </div>
   )   
 }

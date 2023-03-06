@@ -1,12 +1,4 @@
-label {
-  margin-right: 15px;
-}
-
-.formSpan {
-  margin-right: 10px;
-}
-
-.formBtn {
+.btn {
   border: none;
   cursor: pointer;
   background: rgba(90, 255, 49, 0.6);
@@ -15,4 +7,17 @@ label {
   font-size: 14px;
   font-family: 'Monda', sans-serif;
   font-weight: 400;
+  margin-left: 20px;
+  margin: 20px;
+}
+
+.contactslist {
+  width: 600px;
+  margin: 0 auto;
+  
+}
+
+li {
+  display: flex;
+  padding-top: 5px;
 }

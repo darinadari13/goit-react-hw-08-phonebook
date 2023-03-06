@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addContactRequest, deleteContactRequest, getContactsRequest } from "redux/contactsSlice/operations";
 import { selectFilteredContacts, selectLoading} from "redux/contactsSlice/selectors";
 import {selectIsLoggedIn} from "redux/userSlice/selectors";
+import css from '../Contacts/Contacts.module.css';
 
 function ContactsPage() {
   const dispatch = useDispatch();
@@ -34,13 +35,15 @@ function ContactsPage() {
     <ContactForm onSubmit={handleSubmit}/>
     {isLoading && <Loader/>}
     {<Filter/>}
-    {contacts?.length > 0 && <ul>
+    {contacts?.length > 0 && <ul className={css.contactslist}>
       {contacts.map(contact => {
         return (
           <li key={contact.id}>
+            <div>
             <p>Name: {contact.name}</p>
             <p>Number: {contact.number}</p>
-            <button onClick={() => handleDeleteContact(contact.id)}>Delete</button>
+            </div>
+            <button className={css.btn} onClick={() => handleDeleteContact(contact.id)}>Delete</button>
           </li>
         )
       })}

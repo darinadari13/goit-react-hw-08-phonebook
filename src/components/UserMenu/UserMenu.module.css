@@ -1,12 +1,4 @@
-label {
-  margin-right: 15px;
-}
-
-.formSpan {
-  margin-right: 10px;
-}
-
-.formBtn {
+.btn {
   border: none;
   cursor: pointer;
   background: rgba(90, 255, 49, 0.6);

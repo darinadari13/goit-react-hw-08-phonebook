@@ -12,7 +12,7 @@ import UserMenu from '../UserMenu/UserMenu';
 const LazyContacts = lazy(()=> import('pages/Contacts/Contacts.jsx'));
 const LazySignIn = lazy(()=> import('pages/SignIn/SignIn.jsx'));
 const LazySignUp = lazy(()=> import('pages/SignUp/SignUp.jsx'))
-
+const LazyHomePage = lazy(() => import('pages/Home/Home.jsx'))
 
 export default function App() {
   const dispatch = useDispatch();
@@ -35,13 +35,15 @@ export default function App() {
         <nav className={css.nav}>
           {isLoggedIn && userData ? (
             <>
+            <NavLink to='/'></NavLink>
             <NavLink to='/contacts'></NavLink>
             <UserMenu userData={userData}/>
             </>
           ) : (
             <>
+            <NavLink to='/' className={css.home}>Home</NavLink>
             <NavLink to='/login' className={css.signIn}>Sign In</NavLink>  
-            <NavLink to='/register'>Sign Up</NavLink>
+            <NavLink to='/register' className={css.signUp}>Sign Up</NavLink>
             </>
           )}
         </nav>
@@ -49,6 +51,7 @@ export default function App() {
       <main>
         <Suspense fallback={<Loader/>}>
           <Routes>
+            <Route path="/" element={<LazyHomePage/>}/>
             <Route path="/contacts" element={<LazyContacts/>}/>
             <Route path="/login" element={<LazySignIn/>}/>
             <Route path="/register" element={<LazySignUp/>}/>

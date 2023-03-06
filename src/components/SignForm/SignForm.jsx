@@ -64,7 +64,7 @@ export default function SignForm({ onSubmit, isLoginForm = false}) {
               required
             />
         </label>
-        <button type="submit">
+        <button className={css.formBtn} type="submit">
           {isLoginForm ? 'Sign In' : 'Sign up'}
         </button>
       </form>

@@ -2,6 +2,7 @@
   border: 2px solid black;
   margin: 10px;
   width: 600px;
+  margin: 0 auto;
 }
 
 .title {
@@ -16,7 +17,14 @@
 }
 
 .btn {
-  color: blue;
+  border: none;
+  cursor: pointer;
+  background: rgba(90, 255, 49, 0.6);
+  border-radius: 0px 30px 30px 0px;
+  color: #FFF;
+  font-size: 12px;
+  font-family: 'Monda', sans-serif;
+  font-weight: 400;
 }
 
 .btn:hover {

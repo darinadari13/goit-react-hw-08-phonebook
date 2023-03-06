@@ -1,5 +1,7 @@
 .container {
+  max-width: 100%;
   padding: 20px;
+  background-color: rgba(24, 24, 36, 1)
 }
 
 .nav {
@@ -9,4 +11,22 @@
 
 .signIn {
   margin-right: 20px;
+  font-family: 'Monda', sans-serif;
+  font-weight: 400;
+  color: #FFFF;
+}
+
+
+.signUp {
+  margin-right: 20px;
+  font-family: 'Monda', sans-serif;
+  font-weight: 400;
+  color: #FFFF;
+}
+
+.home {
+  margin-right: 20px;
+  font-family: 'Monda', sans-serif;
+  font-weight: 400;
+  color: #FFFF;
 }

@@ -2,3 +2,7 @@
 .inputFilter {
   margin: 10px;
 }
+.filter {
+  width: 600px;
+  margin: 0 AUTO;
+}
